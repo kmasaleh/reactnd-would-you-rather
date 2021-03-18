@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import  applyMiddleware from './middleware';
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import {getAllDataAction,globalReducer} from './actions/actions'
+
+
+
+const _store_ = createStore(globalReducer,applyMiddleware)
+//_store_.dispatch(getAllDataAction());
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={_store_}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

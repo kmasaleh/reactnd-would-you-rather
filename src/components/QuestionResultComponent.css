@@ -1,0 +1,101 @@
+.container{
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-template-rows: 1fr 1fr 5fr 5fr;
+    grid-template-areas:
+     "header header"
+     "side label"
+     "side option1"
+     "side option2" ;
+
+     border:solid 1px;
+     border-color: aliceblue;
+     border-radius: 20px;
+    background-color: bisque;
+    width: 500px;
+    height: 300px;
+    margin: auto;
+    margin-top: 100px;
+    overflow: hidden;
+}
+
+
+.header{
+    grid-area: header;
+    background-color: lightgrey;
+    text-align: left;
+    padding-left: 10px;
+}
+.label{
+    grid-area:label;
+    text-align: left;
+    padding-left: 10px;
+    font-size: large;
+    font-weight:bold ;
+}
+.side-bar{
+    grid-area: side;
+    position: relative;
+    background-color: rgb(224, 183, 208);
+    position: relative;
+    
+}
+.avatar{
+    height: 120px;
+    width:120px;
+    border-radius :50%;
+    position: absolute;
+    top: 50%;  
+    left: 0; 
+    -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.rightborder{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: black;
+    width: 1px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.option1,.option2{
+    border:solid 1px;
+    margin: 10px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5px;
+    border-radius: 10px;
+}
+
+.option1{
+    grid-area: option1;
+    background-color: rgb(192, 240, 225);
+}
+.option2{
+    grid-area: option2;
+    background-color: rgb(166, 210, 235);
+}
+.content{
+    border : solid 1px;
+}
+
+.progress{
+    height: 40px;
+    width :80%;
+    margin: 0;
+    padding: 0;
+}
+.vote{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: small;
+}
+progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
