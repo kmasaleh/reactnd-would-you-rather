@@ -1,0 +1,32 @@
+.container{
+    width: 500px;
+    height: 420px;
+    border-radius: 20px;
+    background-color: bisque;
+    
+    margin: auto;
+    margin-top: 50px;
+}
+
+
+.usersList{
+    width:350px;
+    height: 30px;
+    border-radius: 4px;
+    outline: 0em;
+}
+
+.submit{
+    width: 350px;
+    height: 30px;
+    background-color: chartreuse;
+    border-radius: 4px;
+}
+
+.header{
+    background-color: black;
+    color: aliceblue;
+    border-top-left-radius:  20px;
+    border-top-right-radius:  20px;
+
+}

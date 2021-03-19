@@ -1,4 +1,4 @@
- const mapKeyValueObjectToArray = (obj)=>{
+export  const mapKeyValueObjectToArray = (obj)=>{
     const output =  Object.entries(obj).map(([key, value]) => (value));
     return output;
 }
