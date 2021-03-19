@@ -3,6 +3,8 @@ import { _getQuestions, _getUsers } from "../_DATA"
 export const ACTION_TYPES = {
     ADD_QUESTIONS : "ADD_QUESTIONS",
     ADD_USERS : "ADD_USERS" ,
+    SIGN_IN : "SIGN_IN",
+    SIGN_OUT : "SIGN_OUT"
 }
 
 export const globalReducer = (state={},action)=>{
@@ -19,7 +21,20 @@ export const globalReducer = (state={},action)=>{
         ...state,
         ...action.users
     }
+
+    if(action.type == ACTION_TYPES.SIGN_IN)
+    return {
+        ...state,
+        autheduser  : action.user
+    }
+
+    if(action.type == ACTION_TYPES.SIGN_OUT)
+    return {
+        ...state,
+        autheduser  : null
+    }
         
+
     return state;
   }
 
@@ -35,7 +50,19 @@ export const ACTION_FACTORY ={
             type: ACTION_TYPES.ADD_USERS,
             users
         }
-    }
+    },
+    createSigninUser : (user)=>{
+        return {
+            type: ACTION_TYPES.SIGN_IN,
+            user
+        }
+    },
+    createSignoutUser : (user)=>{
+        return {
+            type: ACTION_TYPES.SIGN_OUT,
+            user
+        }
+    },
     
 }
 

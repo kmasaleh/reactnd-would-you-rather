@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './QuestionResultComponent.module.css'
 import {filterKeyValueObject} from './../utils'
-
+import answered from './../assets/YouAnswered.png'
 
 class QuestionResultComponent  extends Component{
 
@@ -32,6 +32,7 @@ class QuestionResultComponent  extends Component{
                 
                 <div className={classes.label}>Results:</div>
                 <div className={classes.option1}>
+                    
                     Would you rather {option1.text} ?
                     <progress className={classes.progress}   value={option1.ratio} max="100"> {option1.ratio}% </progress>
                     <div className={classes.vote}>{option1.votes} out of {option1.votes+option2.votes} votes</div>

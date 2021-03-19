@@ -6,12 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import  applyMiddleware from './middleware';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
-import {getAllDataAction,globalReducer} from './actions/actions'
+import {globalReducer} from './actions/actions'
 
 
 
 const _store_ = createStore(globalReducer,applyMiddleware)
-//_store_.dispatch(getAllDataAction());
+
 
 ReactDOM.render(
   <React.StrictMode>

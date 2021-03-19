@@ -1,0 +1,28 @@
+.container{
+    border :solid 1px black;
+    width: 600px;
+    margin: auto;
+    margin-top: 50px;
+
+}
+
+.content{
+    height: 100%;
+    overflow-y: scroll;
+    max-height: 600px;
+}
+.header{
+    background-color: gray;
+    height: 40px;
+}
+.header button{
+    width: 50%;
+    height: 100%;
+    color : green;
+    font-size: 22px;
+}
+
+
+.activeBtn{
+    color: red !important;
+}

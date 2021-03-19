@@ -4,7 +4,7 @@ import classes from  './Login.module.css'
 import logo from './../logo.svg';
 import {mapKeyValueObjectToArray} from './../utils'
 import avatar_1 from './../assets/avatar-2155431_1920.png'
-
+import {ACTION_FACTORY} from './../actions/actions'
 class Login extends Component{
 
     constructor(){
@@ -15,13 +15,15 @@ class Login extends Component{
         }
     }
     onSignIn = ()=>{
-        
-        alert('sign in..');
+        const {dispatch} = this.props;
+        dispatch(ACTION_FACTORY.createSigninUser(this.state.selectedUser));
+        alert('signed in..');
     }
     handleChangeselection = ($event)=>{
      //   $event.preventDefault();
         let t = $event.target.value;
-        alert(`user ${t} signed in ..`)
+        alert(`user ${t} selected ..`)
+        this.setState({selectedUser:t})
         
     }
     render(){
@@ -57,7 +59,7 @@ class Login extends Component{
     }
 }
 
-const mapStateToProps = ({users})=>{
+const mapStateToProps = ({users,autheduser})=>{
     const arr  = mapKeyValueObjectToArray(users);
     let r =  arr.map( user=> {
         return {id:user.id, name : user.name,avatar: user.avatarURL}
