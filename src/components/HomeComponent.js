@@ -4,11 +4,14 @@ import classes from  './HomeComponent.module.css'
 import {mapKeyValueObjectToArray} from './../utils'
 import QuestionSummaryComponent from './QusetionSummaryComponent'
 import { getAnsweredQuestionsForUser,getUnansweredQuestionsForUser} from './../utils'
+import withAuth from './../components/withAuth'
+import { Redirect } from 'react-router'
+
 function QuestionsList ( {questions}){
     return(
         <Fragment>
             {
-            questions.map((question)=>{
+            questions!==null && questions!==undefined && questions.map((question)=>{
               return <QuestionSummaryComponent key={question.id} id={question.id}/> 
             })
         }
@@ -30,10 +33,13 @@ class Home extends Component{
     }
 
     render(){
-        const {answered,non} = this.props;
+        const {answered,non,autheduser} = this.props;
         const {showAnswered} = this.state;
 
-        return (
+        return !autheduser?
+            <Redirect to="/login/"/>
+            :
+        (
             <div className={classes.container}>
                 <header className={classes.header}>
                     <button onClick={this.handleUnansweredClick} className={!showAnswered?classes.activeBtn:''}>Unanswered Questions</button>
@@ -56,8 +62,8 @@ const mapStateToProps = ({questions,autheduser})=>{
     
     return {
         answered : getAnsweredQuestionsForUser(_questions,autheduser),
-        non :   getUnansweredQuestionsForUser(_questions,autheduser)
+        non :   getUnansweredQuestionsForUser(_questions,autheduser),
+        autheduser
     }
 }
-
 export default connect(mapStateToProps)(Home)

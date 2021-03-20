@@ -26,8 +26,13 @@ class UserStatisticsComponent  extends Component{
                         <div style={{padding:15}}>Created questions {created}</div>
                    </div>
                    <div className={classes.score}>
-                        <div style={{border:'solid 1px black',height:'40%'}}>Score</div>
-                        <div style={{border:'solid 1px black',height:'60%'}}>{answered+created}</div>
+                        <div className={classes.scoreLabel} >Score</div>
+                        
+                        <div className={classes.scoreNumber} >
+                            <div className={classes.circle}>
+                                <div className={classes.number}>{answered+created}</div>
+                            </div>
+                        </div>
                    </div>
                 </div>
             </div>

@@ -9,6 +9,9 @@ export const filterKeyValueObject = (obj,compare)=>{
 }
 
 export const getAnsweredQuestionsForUser =(messages,userId)=>{
+    if(userId===undefined || userId===null)
+        return null;
+
         return messages.filter((message)=> {
             return (
                 message.optionOne.votes.find(user=> user===userId)!==undefined
@@ -19,6 +22,9 @@ export const getAnsweredQuestionsForUser =(messages,userId)=>{
     })
 }
 export const getUnansweredQuestionsForUser =(messages,userId)=>{
+    if(userId===undefined || userId===null)
+        return null;
+
     return messages.filter((message)=> {
         return (
             message.optionOne.votes.find(user=> user===userId)===undefined
@@ -28,3 +34,17 @@ export const getUnansweredQuestionsForUser =(messages,userId)=>{
 
     })
 }
+
+export const usersSortedWithScore = (users)=>{
+    let _users = users.map(user=>{
+        const answered = Object.entries(user.answers).length;
+        const created = user.questions.length;
+        user.score = answered + created;
+        return user;
+    } )
+    _users =  _users.sort((user1,user2)=> user2.score-user1.score);
+    return _users;
+}
+export const avatarUrl = (user)=> `${process.env.PUBLIC_URL}/${user.avatarURL}`
+
+

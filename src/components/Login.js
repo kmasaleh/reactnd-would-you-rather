@@ -5,30 +5,38 @@ import logo from './../logo.svg';
 import {mapKeyValueObjectToArray} from './../utils'
 import avatar_1 from './../assets/avatar-2155431_1920.png'
 import {ACTION_FACTORY} from './../actions/actions'
+import {Redirect} from 'react-router-dom'
+
 class Login extends Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+        const {users} = this.props;
         this.state = {
-            selectedUser :null,
-            optionsState:-1
+            selectedUser : users[0].id,
+            signedIn:false,
+
+
         }
     }
     onSignIn = ()=>{
         const {dispatch} = this.props;
         dispatch(ACTION_FACTORY.createSigninUser(this.state.selectedUser));
-        alert('signed in..');
+        this.setState({signedIn:true})
     }
     handleChangeselection = ($event)=>{
-     //   $event.preventDefault();
+        $event.preventDefault();
         let t = $event.target.value;
-        alert(`user ${t} selected ..`)
         this.setState({selectedUser:t})
-        
     }
+
     render(){
         const {users} = this.props;
-        return (
+        const {signedIn,selectedUser} = this.state;
+        return signedIn ?
+                (<Redirect to="/home/" />)
+                :
+            (
             <div className={classes.container}>
                 <header className={classes.header}>
                     <h2 style={{paddingTop:15}}>Welcome to the Would You Rathre App</h2>
@@ -38,14 +46,15 @@ class Login extends Component{
                     <img src={logo} alt='logo' style={{width:150,height:100}}></img>
                     <p style={{fontWeight:700,fontSize:32,color:'green'}}>Sign in</p>
                     <div>
-                    <select value="" name="users" id="users" className={classes.usersList} onChange={this.handleChangeselection}>
-                        <option key={-1} value="" disabled>Select user ..   </option>
+                    <select value={selectedUser?selectedUser:""} name="users" id="users" className={classes.usersList} onChange={this.handleChangeselection}>
                         {
                             users.map( (user)=>{
-                                return( <option key={user.id} value={user.id} 
-                                        style={{backgroundImage:avatar_1}}>
+                                return( 
+                                <option key={user.id} value={user.id}  style={{backgroundImage:avatar_1}}>
                                         {user.name}
-                                        </option>)
+                                    
+                                </option>
+                                        )
                             })
                         }
                     </select>

@@ -12,6 +12,10 @@ import Nav from './components/Nav'
 import Login from './components/Login';
 import QuestionSummaryComponent from './components/QusetionSummaryComponent'
 import HomeComponent from './components/HomeComponent';
+import QuestionSubmitComponent from './components/QuestionVoteSubmitComponent'
+import LeaderboardComponent from './components/LeaderboardComponent'
+
+
 
 class  App extends Component {
 
@@ -38,10 +42,14 @@ class  App extends Component {
             ?  null
             : 
               <Fragment>
+               
               <div> 
                   <Route path="/home" exact component={HomeComponent} />
               </div>
  
+              <div>
+                <Route path="/leaderboard" exact component={LeaderboardComponent} />
+              </div>
               <div> 
                   <Route path="/result/:id" exact render ={({match})=>{
                   return (<QuestionResultComponent id={match.params.id}/>)
@@ -53,6 +61,11 @@ class  App extends Component {
               <div> 
                   <Route path="/question/:id" exact render ={({match})=>{
                   return (<QuestionSummaryComponent id={match.params.id}/>)
+                    }}/>
+              </div>
+              <div> 
+                  <Route path="/submit/:id" exact render ={({match})=>{
+                  return (<QuestionSubmitComponent id={match.params.id}/>)
                     }}/>
               </div>
 
@@ -81,5 +94,5 @@ export default connectedApp;
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
           </header>
-
+<img src={process.env.PUBLIC_URL + '/avatar-2155431_1920.png'} alt="logo" />
 */

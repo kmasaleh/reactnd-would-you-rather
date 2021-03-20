@@ -1,7 +1,7 @@
 ul{
     list-style: none;
-    vertical-align: middle;
-    margin: 5;
+    justify-content: center;
+    margin: 0;
     padding: 0;
 }
 
@@ -13,11 +13,23 @@ ul{
 li{
     display: inline;
     padding: 0px;
-    padding-left: 70px;
+    padding-left: 0px;
+    padding-right: 70px;
     margin: 0;
-
-    
 }
 nav{
-    border-bottom: solid 1px green;
+    border-bottom: solid 4px green;
+    font-size: 24px;
+    margin: 0;
+    justify-content: center;
+}
+
+.avatar{
+    width:40 !important;
+    height:40 !important;
+    border-radius:50%;
+}
+
+li a{
+   text-decoration: none; 
 }

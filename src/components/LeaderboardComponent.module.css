@@ -1,0 +1,11 @@
+.container{
+    border :solid 1px black;
+    width: 600px;
+    margin: auto;
+    margin-top: 50px;
+    
+}
+
+.content{
+    height: 100%;
+}

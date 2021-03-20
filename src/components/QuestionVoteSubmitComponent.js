@@ -3,13 +3,34 @@ import { connect } from 'react-redux'
 import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './QuestionVoteSubmitComponent.module.css'
 import {filterKeyValueObject} from '../utils'
-
-
+import {_saveQuestionAnswer} from './../_DATA'
+import { handleSubmitVote} from './../actions/actions'
+import {Redirect } from 'react-router-dom'
 class QuestionVoteSubmitComponent  extends Component{
 
+    state = {
+        answer : '',
+        submitted:false,
+    }
+    
+    handleSubmit = (e)=>{
+        e.preventDefault();
+        const {question,authedUser,dispatch} = this.props;
+        const {answer} = this.state;
+        dispatch(handleSubmitVote({question,answer,user:authedUser}))
+        this.setState({submitted:true})
+    }
+
+    voteForOptionOne = (e)=>{
+        this.setState({answer:"optionOne"})
+    }
+    voteForOptionTwo = (e)=>{
+        this.setState({answer:"optionTwo"})
+    }
+
     render(){
-        console.log(this.props);
-        const {question,user} = this.props;
+        
+        const {question,author} = this.props;
         const option1 = {
             text : question.optionOne.text,
             votes : question.optionOne.votes.length,
@@ -18,10 +39,13 @@ class QuestionVoteSubmitComponent  extends Component{
             text : question.optionTwo.text,
             votes : question.optionTwo.votes.length,
         }
-
-        return (
+        const {submitted} = this.state;
+        return submitted?
+            <Redirect to={`/result/${question.id}`} />
+            :
+        (
             <div className={classes.container}>
-                <div className={classes.header}><b>{user.name} asks:</b></div>
+                <div className={classes.header}><b>{author.name} asks:</b></div>
                 <div className={classes.sideBar}>
                     <img className={classes.avatar} src={avatar} alt="avatar"></img>
                 </div>
@@ -29,11 +53,11 @@ class QuestionVoteSubmitComponent  extends Component{
                     <div >
                         <div className={classes.label}>Would you rather ...</div>
                         <div style={{textAlign:'left',paddingLeft:15}}>
-                            <input   type="radio" id="op1" name="options" value="op1" />{option1.text} <br/>
-                            <input type="radio" id="op2" name="options" value="op2" />{option2.text}
+                            <input   type="radio" id="op1" name="options" value="op1" onClick={this.voteForOptionOne}/>{option1.text} <br/>
+                            <input type="radio" id="op2" name="options" value="op2" onClick={this.voteForOptionTwo}/>{option2.text}
                         </div>
                         <div style={{padding:15}}>
-                            <input type="button" value="Submit" className = {classes.submit}/>
+                            <input type="button" value="Submit" className = {classes.submit} onClick={this.handleSubmit}/>
                         </div>
                    </div>
                 </div>
@@ -42,13 +66,15 @@ class QuestionVoteSubmitComponent  extends Component{
     }
 }
 
-const mapStateToProps = ({questions,users},{id})=>{
+const mapStateToProps = ({questions,users,autheduser},{id})=>{
 
-    const question = filterKeyValueObject(questions,(e=>e.id===id));
-    const user  = filterKeyValueObject(users,(e=>e.id===question?.author));
+    const question = questions[id]
+    const author  = users[question.author]
+    const authedUser = users[autheduser]
     return {   
-        question : question,
-        user: user
+        question,
+        author,
+        authedUser
     };
 }
 const connectedQuestionVoteSubmitComponent = connect(mapStateToProps)(QuestionVoteSubmitComponent)

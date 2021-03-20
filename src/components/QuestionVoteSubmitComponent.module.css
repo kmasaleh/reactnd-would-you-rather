@@ -1,6 +1,6 @@
 .container{
     display: grid;
-    grid-template-columns: 2fr 6fr;
+    grid-template-columns: 3fr 6fr;
     grid-template-rows: 30px 170px ;
     grid-template-areas:
      "header header"
@@ -34,18 +34,16 @@
     grid-area: side;
     position: relative;
     background-color: rgb(224, 183, 208);
-    position: relative;
-    
 }
 .avatar{
     height: 120px;
     width:120px;
     border-radius :50%;
+    margin: 0;
     position: absolute;
-    top: 50%;  
-    left: 0; 
-    -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .submit{
