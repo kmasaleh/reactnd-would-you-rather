@@ -1,6 +1,7 @@
 export  const mapKeyValueObjectToArray = (obj)=>{
     const output =  Object.entries(obj).map(([key, value]) => (value));
-    return output;
+
+    return output.sort((q1,q2)=>q2.timestamp-q1.timestamp);
 }
 
 export const filterKeyValueObject = (obj,compare)=>{
@@ -45,6 +46,11 @@ export const usersSortedWithScore = (users)=>{
     _users =  _users.sort((user1,user2)=> user2.score-user1.score);
     return _users;
 }
-export const avatarUrl = (user)=> `${process.env.PUBLIC_URL}/${user.avatarURL}`
+export const avatarUrl = (user)=> {
+    return `${process.env.PUBLIC_URL}/${user.avatarURL}`
+}
+export const imgUrl = (name)=> {
+    return `${process.env.PUBLIC_URL}/${name}`
+}
 
 

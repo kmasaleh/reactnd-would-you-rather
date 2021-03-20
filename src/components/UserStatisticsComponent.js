@@ -2,22 +2,35 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './UserStatisticsComponent.module.css'
-import {filterKeyValueObject} from '../utils'
+import {filterKeyValueObject,avatarUrl,imgUrl} from '../utils'
 
 
 class UserStatisticsComponent  extends Component{
 
     render(){
         console.log(this.props);
-        const {user} = this.props;
+        const {user,order} = this.props;
         const answered = Object.entries(user.answers).length;
         const created = user.questions.length;
-
+        let _class = "";
+        if(order){
+            switch(order)
+            {
+                case 1: _class = classes.gold; break;
+                case 2: _class = classes.silver; break;
+                case 3: _class = classes.bronze; break;
+            }
+        }
+      
         return (
             <div className={classes.container}>
-                <div className={classes.header}><b>{user.name} </b></div>
+                <div className={classes.header}><b>{user.name} </b>
+                {
+                    //order && <img src={imgSrc} alt='medal' style={{width:30,height:30}}/>
+                }
+                </div>
                 <div className={classes.sideBar}>
-                    <img className={classes.avatar} src={avatar} alt="avatar"></img>
+                    <img className={classes.avatar} src={avatarUrl(user)} alt="avatar"></img>
                 </div>
                 <div className={classes.content}>
                     <div className={classes.result} >
@@ -29,7 +42,7 @@ class UserStatisticsComponent  extends Component{
                         <div className={classes.scoreLabel} >Score</div>
                         
                         <div className={classes.scoreNumber} >
-                            <div className={classes.circle}>
+                            <div className={[classes.circle,_class].join(" ")}>
                                 <div className={classes.number}>{answered+created}</div>
                             </div>
                         </div>

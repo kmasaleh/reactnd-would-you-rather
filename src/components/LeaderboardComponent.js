@@ -6,11 +6,14 @@ import UserStatisticsComponent from './UserStatisticsComponent'
 import {usersSortedWithScore,mapKeyValueObjectToArray} from './../utils'
 
 function QuestionsList ( {users}){
+    let i=1;
     return(
+        
         <Fragment>
             {
+                
                 users!==null && users!==undefined && users.map((user)=>{
-                return <UserStatisticsComponent key={user.id} id={user.id}/> 
+                return <UserStatisticsComponent key={user.id} id={user.id} order={i++}/> 
             })
         }
         </Fragment>

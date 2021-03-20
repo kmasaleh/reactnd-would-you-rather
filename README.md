@@ -1,3 +1,20 @@
+# Udacity Advanced Frontend Web Development Nano Degree 
+# Would you rather: A Book Lending App
+### Author : Khaled Saleh  
+###  Date:   11/03/2021  
+
+### ___________________________________________ 
+## Project Overview
+
+In the "Would You Rather?" Project, we'll build a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
+In this app, users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
+
+## Vision
+My vision was to utilize React and Redux features and apply OOP concepts that I learned to implement the needed functionality using  ES6 javascript classes that construct the model of a composition objects well connected that do the job.
+By doing this I got a great benefit from the encapsulation fetaure of React components and ES6 classes then easly applying the DRY and separation of concerns principles inside my code and utlizing Redux to provide the whole application’s comonents a store that hold a single source of truth.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

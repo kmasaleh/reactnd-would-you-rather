@@ -31,7 +31,7 @@ class Nav extends Component {
                     {
                         user!==undefined &&
                         <li>
-                            <NavLink to='/new' exact activeClassName={classes.active}>
+                            <NavLink to='/add' exact activeClassName={classes.active}>
                                 New Question
                             </NavLink>
                         </li>

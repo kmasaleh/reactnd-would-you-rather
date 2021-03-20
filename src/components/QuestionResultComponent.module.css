@@ -72,6 +72,8 @@
     text-align: left;
     padding-left: 5px;
     border-radius: 10px;
+    position: relative;
+    overflow: visible;
 }
 
 .option1{
@@ -100,4 +102,12 @@ progress[value]::-webkit-progress-bar {
     background-color: #eee;
     border-radius: 2px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
+
+  .answeredBadge{
+    width:20px;
+    height:20px;
+    position: absolute;
+    top: -10px;;
+    right: -5px;
   }

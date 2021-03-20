@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './QuestionVoteSubmitComponent.module.css'
-import {filterKeyValueObject} from '../utils'
+import {filterKeyValueObject,avatarUrl} from '../utils'
 import {_saveQuestionAnswer} from './../_DATA'
 import { handleSubmitVote} from './../actions/actions'
 import {Redirect } from 'react-router-dom'
@@ -47,7 +47,7 @@ class QuestionVoteSubmitComponent  extends Component{
             <div className={classes.container}>
                 <div className={classes.header}><b>{author.name} asks:</b></div>
                 <div className={classes.sideBar}>
-                    <img className={classes.avatar} src={avatar} alt="avatar"></img>
+                    <img className={classes.avatar} src={avatarUrl(author)} alt="avatar"></img>
                 </div>
                 <div className={classes.content}>
                     <div >

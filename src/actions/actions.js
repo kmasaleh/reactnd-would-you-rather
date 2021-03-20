@@ -1,7 +1,4 @@
-import { _getQuestions, _getUsers } from "../_DATA"
-import {_saveQuestionAnswer} from './../_DATA'
-import { combineReducers } from 'redux'
-
+import { _getQuestions, _getUsers ,_saveQuestionAnswer,formatQuestion,_saveQuestion} from './../_DATA'
 
 
 export const ACTION_TYPES = {
@@ -9,12 +6,33 @@ export const ACTION_TYPES = {
     ADD_USERS : "ADD_USERS" ,
     SIGN_IN : "SIGN_IN",
     SIGN_OUT : "SIGN_OUT",
-    VOTE : "VOTE"
+    VOTE : "VOTE",
+    NEW_QUESTION :"NEW_QUESTION"
 }
 
 export const globalReducer = (state={},action)=>{
 
     switch(action.type){
+        
+        case ACTION_TYPES.NEW_QUESTION:
+            {   const question = action.question;
+                let back = {
+                    ...state,
+                    questions:{
+                        ...state.questions,
+                        [question.id]: question
+                    },
+                    users: {
+                        ...state.users,
+                       [question.author]:{
+                         ...state.users[question.author],
+                         questions : state.users[question.author].questions.concat(question.id)
+                       }
+                    }
+                }
+                return back;
+        
+            }
         case ACTION_TYPES.VOTE:
             const question = action.question
             const answer=action.answer
@@ -103,6 +121,13 @@ export const ACTION_FACTORY ={
             user
         }
     },
+    createNewQuestion : ({question})=>{
+        return {
+            type: ACTION_TYPES.NEW_QUESTION,
+            question,
+        }
+    },
+
 }
 
 
@@ -126,30 +151,6 @@ const asyncGetAllData = async ()=>{
     }
 }
 
-
-const getAllData =()=>{
-    return Promise.all([
-          _getQuestions()  ,
-          _getUsers()
-    ])
-    .then( ([questions,users])=>{
-        return{
-        questions : questions,
-        users : users
-        }
-    })
-}
-
-
-
-const dispatchAllActionsToStore = (dispatch)=>{
-    getAllData().then( (data)=>{
-        dispatch(ACTION_FACTORY.createAddQuestions(data.questions));
-        dispatch(ACTION_FACTORY.createAddUsers(data.users));
-    })
-}
-
-
 const asyncDispatchAllActionsToStore = async ( dispatch)=>{
     const data = await  asyncGetAllData();
     dispatch(ACTION_FACTORY.createAddQuestions( {questions : data.questions} ));
@@ -157,10 +158,15 @@ const asyncDispatchAllActionsToStore = async ( dispatch)=>{
 
 }
 
-export const  getAllDataAction = ()=>{
- //   return dispatchAllActionsToStore;
-    return  asyncDispatchAllActionsToStore;
+export const handleSubmitNewQuestion = (question)=>{
+    return async (dispatch)=>{
+         const formattedQuestion =  await _saveQuestion(question)
+         dispatch (ACTION_FACTORY.createNewQuestion({question:formattedQuestion})) 
+    }
 }
 
+export const  getAllDataAction = ()=>{
+    return  asyncDispatchAllActionsToStore;
+}
 
 
