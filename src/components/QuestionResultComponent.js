@@ -5,6 +5,7 @@ import classes from './QuestionResultComponent.module.css'
 import {avatarUrl,filterKeyValueObject, imgUrl} from './../utils'
 import answered from './../assets/YouAnswered.png'
 import { Redirect } from 'react-router'
+import QuestionVoteSubmitComponent from './QuestionVoteSubmitComponent'
 
 class QuestionResultComponent  extends Component{
 
@@ -34,7 +35,8 @@ class QuestionResultComponent  extends Component{
         //if the user write the /questions/id he should the both types of polls answered an unanswered
         // so i intercept the call here and if the question is answered i redirect it to the vote component    
         if(!option1.answered && !option2.answered)
-                return <Redirect to={`/submit/${question.id}`} />
+                //return <Redirect to={`/submit/${question.id}`} />
+                return <QuestionVoteSubmitComponent id={question.id} />
 
 
             return (

@@ -29,8 +29,8 @@ class QuestionSummaryComponent  extends Component{
             text : question.optionOne.text,
         }
         const {toVote} = this.state;
-        const questionPath = `${toVote?'/submit/':'/questions/'}${question.id}`;
-
+        //const questionPath = `${toVote?'/submit/':'/questions/'}${question.id}`;
+        const questionPath = `/questions/${question.id}`;
         return  (
             <div className={classes.container}>
                 <div className={classes.header}><b>{author.name} asks:</b></div>

@@ -31,15 +31,15 @@ class  App extends Component {
   }
 
   render(){
-    return (
+    if(this.loaded===false )
+      return  null;
+    
+      return (
       <Router>
         
             <div className="App">
               <Nav/>
               {
-                this.loaded===false 
-                ?  null
-                : 
                   <Fragment>
                     <Switch>
                     <Route path="/" exact component={HomeComponent} />
