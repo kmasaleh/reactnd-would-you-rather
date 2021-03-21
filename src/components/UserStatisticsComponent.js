@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './UserStatisticsComponent.module.css'
-import {filterKeyValueObject,avatarUrl,imgUrl} from '../utils'
+import {filterKeyValueObject,avatarUrl} from '../utils'
 
 
 class UserStatisticsComponent  extends Component{
@@ -19,6 +18,7 @@ class UserStatisticsComponent  extends Component{
                 case 1: _class = classes.gold; break;
                 case 2: _class = classes.silver; break;
                 case 3: _class = classes.bronze; break;
+                default: _class =""
             }
         }
       

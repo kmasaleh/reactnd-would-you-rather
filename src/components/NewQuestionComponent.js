@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import classes from './NewQuestionComponent.module.css'
-import {filterKeyValueObject} from '../utils'
-import {_saveQuestionAnswer} from './../_DATA'
 import { handleSubmitNewQuestion} from './../actions/actions'
-import {Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router'
+import {withRouter} from 'react-router-dom';
 
 
 class NewQuestionComponent  extends Component{
@@ -13,7 +12,7 @@ class NewQuestionComponent  extends Component{
         submitted:false,
         OptionOne : "",
         OptionTwo : "",
-        error: ""
+        
     }
     
     handleSubmit = (e)=>{
@@ -45,12 +44,13 @@ class NewQuestionComponent  extends Component{
     render(){
         
         const {authedUser} = this.props;
-        const {submitted,error} = this.state;
+        const {submitted} = this.state;
         
         if(submitted )
             return <Redirect to={`/home/`} />
-        if( !authedUser)
-            return <Redirect to={`/login/`} />
+
+        if(authedUser===undefined)
+            return (<Redirect   to={{pathname: "/login",state: { referrer: this.props.location }}}/>)
             
         return (
             <form onSubmit={this.handleSubmit}>
@@ -88,5 +88,5 @@ const mapStateToProps = ({users,autheduser})=>{
         authedUser
     };
 }
-const connectedNewQuestionComponent = connect(mapStateToProps)(NewQuestionComponent)
+const connectedNewQuestionComponent = connect(mapStateToProps)(withRouter(NewQuestionComponent))
 export default connectedNewQuestionComponent;

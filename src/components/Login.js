@@ -5,7 +5,7 @@ import logo from './../logo.svg';
 import {mapKeyValueObjectToArray} from './../utils'
 import avatar_1 from './../assets/avatar-2155431_1920.png'
 import {ACTION_FACTORY} from './../actions/actions'
-import {Redirect,useHistory} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 class Login extends Component{
 
@@ -36,9 +36,13 @@ class Login extends Component{
     render(){
         const {users} = this.props;
         const {signedIn,selectedUser} = this.state;
-        // this.props.history.goBack();
-        if(signedIn)
-            return (<Redirect to="/home/" />)
+
+        if(signedIn){
+            if(this.props.location.state && this.props.location.state.referrer)
+                return (<Redirect to={this.props.location.state.referrer} />)    
+            else
+                return (<Redirect to="/home/" />)
+        }
         
         return(
             <div className={classes.container}>

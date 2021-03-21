@@ -1,16 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import QuestionResultComponent from './components/QuestionResultComponent';
 import {connect} from 'react-redux'
 import { Component ,Fragment} from 'react';
 import {getAllDataAction} from './actions/actions'
-import QuestionVoteSubmitComponent from './components/QuestionVoteSubmitComponent'
-import UserStatisticsComponent from './components/UserStatisticsComponent'
-import {BrowserRouter as Router,Redirect,Route,Switch } from 'react-router-dom'
-
+import {BrowserRouter as Router,Route,Switch } from 'react-router-dom'
 import Nav from './components/Nav'
 import Login from './components/Login';
-import QuestionSummaryComponent from './components/QusetionSummaryComponent'
 import HomeComponent from './components/HomeComponent';
 import QuestionSubmitComponent from './components/QuestionVoteSubmitComponent'
 import LeaderboardComponent from './components/LeaderboardComponent'
@@ -19,19 +14,16 @@ import Error from './components/404'
 
 class  App extends Component {
 
-  constructor(){
-    super();
-    this.loaded=false;
-
+  state ={
+    loaded:false
   }
   async componentDidMount(){
-    await this.props.dispatch(getAllDataAction())
-    this.loaded=true;
-    this.forceUpdate();
+    await this.props.getAllDataAction();
+    this.setState({loaded:true});
   }
 
   render(){
-    if(this.loaded===false )
+    if(this.state.loaded===false )
       return  null;
     
       return (
@@ -70,20 +62,7 @@ class  App extends Component {
 
 
 
-const connectedApp = connect()(App)
+const connectedApp = connect(null,{getAllDataAction})(App)
 
 export default connectedApp;
 
-
-/*
-<Route path="" exact component={Error} />
-              <Redirect to="/404"   />
-              <Login/>
-              <QuestionResultComponent id={'8xf0y6ziyjabvozdd253nd'}/>
-              <QuestionVoteSubmitComponent id={'8xf0y6ziyjabvozdd253nd'}/>
-              <UserStatisticsComponent id='tylermcginnis'/>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-          </header>
-<img src={process.env.PUBLIC_URL + '/avatar-2155431_1920.png'} alt="logo" />
-*/

@@ -5,13 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import  applyMiddleware from './middleware';
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
+import { createStore} from 'redux'
+//import rootReducer from './reducers'
 import {globalReducer} from './actions/actions'
 
-
-
-const _store_ = createStore(globalReducer,applyMiddleware)
-
+const _store_ = createStore(globalReducer ,applyMiddleware)
+//const _store_ = createStore(rootReducer,applyMiddleware)
 
 ReactDOM.render(
   <React.StrictMode>

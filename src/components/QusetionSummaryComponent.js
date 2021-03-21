@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './QusetionSummaryComponent.module.css'
 import {Link} from 'react-router-dom'
 import {avatarUrl} from './../utils'
@@ -8,16 +7,6 @@ import {avatarUrl} from './../utils'
 
 class QuestionSummaryComponent  extends Component{
     
-    
-    constructor(props){
-        super(props);
-        const {question,authedUser} = this.props;
-
-        this.state ={
-            toVote : authedUser.answers[question.id]===undefined
-        }
-    
-    }
 
     handleViewPull = (event)=>{
         event.preventDefault();
@@ -28,8 +17,7 @@ class QuestionSummaryComponent  extends Component{
         const option1 = {
             text : question.optionOne.text,
         }
-        const {toVote} = this.state;
-        //const questionPath = `${toVote?'/submit/':'/questions/'}${question.id}`;
+
         const questionPath = `/questions/${question.id}`;
         return  (
             <div className={classes.container}>

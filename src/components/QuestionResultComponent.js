@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './QuestionResultComponent.module.css'
 import {avatarUrl,filterKeyValueObject, imgUrl} from './../utils'
-import answered from './../assets/YouAnswered.png'
-import { Redirect } from 'react-router'
 import QuestionVoteSubmitComponent from './QuestionVoteSubmitComponent'
+import { Redirect } from 'react-router'
+import {withRouter} from 'react-router-dom';
+
 
 class QuestionResultComponent  extends Component{
 
@@ -14,8 +14,10 @@ class QuestionResultComponent  extends Component{
         const {question,author,autheduser} = this.props;
 
 
-        if(question===undefined)
-            return <Redirect to="/404" />
+        if(question===undefined){
+            return (<Redirect   to={{pathname: "/login",state: { referrer: "/404"}}}/>)
+        }
+            
         const totalVotes = (question.optionOne.votes.length+question.optionTwo.votes.length);
         const option1 = {
             text : question.optionOne.text,
@@ -30,8 +32,9 @@ class QuestionResultComponent  extends Component{
             answered : question.optionTwo.votes.findIndex(v=>v===autheduser)!==-1
         }
         
-        if(!autheduser)
-            return <Redirect to='/login' />
+        if(autheduser===undefined)
+            return (<Redirect   to={{pathname: "/login",state: { referrer: this.props.location }}}/>)
+            
         //if the user write the /questions/id he should the both types of polls answered an unanswered
         // so i intercept the call here and if the question is answered i redirect it to the vote component    
         if(!option1.answered && !option2.answered)
@@ -78,5 +81,5 @@ const mapStateToProps = ({autheduser,questions,users},{id})=>{
     };
     
 }
-const connectedQuestionResult = connect(mapStateToProps)(QuestionResultComponent)
+const connectedQuestionResult = connect( mapStateToProps)(withRouter(QuestionResultComponent))
 export default connectedQuestionResult;

@@ -1,4 +1,4 @@
-import { _getQuestions, _getUsers ,_saveQuestionAnswer,formatQuestion,_saveQuestion} from './../_DATA'
+import { _getQuestions, _getUsers ,_saveQuestionAnswer,_saveQuestion} from './../_DATA'
 
 
 export const ACTION_TYPES = {
@@ -155,6 +155,8 @@ const asyncDispatchAllActionsToStore = async ( dispatch)=>{
     const data = await  asyncGetAllData();
     dispatch(ACTION_FACTORY.createAddQuestions( {questions : data.questions} ));
     dispatch(ACTION_FACTORY.createAddUsers({users:data.users}));
+  //dispatch(ACTION_FACTORY.createAddQuestions( data.questions ));
+  //dispatch(ACTION_FACTORY.createAddUsers(data.users));
 
 }
 

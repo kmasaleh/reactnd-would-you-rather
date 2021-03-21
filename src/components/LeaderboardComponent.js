@@ -2,6 +2,8 @@ import React ,{Component,Fragment} from 'react'
 import { connect } from 'react-redux'
 import classes from  './LeaderboardComponent.module.css'
 import { Redirect } from 'react-router'
+import {withRouter} from 'react-router-dom';
+
 import UserStatisticsComponent from './UserStatisticsComponent'
 import {usersSortedWithScore,mapKeyValueObjectToArray} from './../utils'
 
@@ -27,10 +29,11 @@ class LeaderboardComponent extends Component{
 
     render(){
         const {users,autheduser} = this.props
-        return !autheduser?
-            <Redirect to="/login/"/>
-            :
-        (
+        if(autheduser===undefined)
+            return (<Redirect   to={{pathname: "/login",state: { referrer: this.props.location }}}/>)
+
+
+        return (
             <div className={classes.container}>
                 <div className={classes.content}>
                     <QuestionsList users={users}/>
@@ -48,4 +51,4 @@ const mapStateToProps = ({users,autheduser})=>{
         autheduser
     }
 }
-export default connect(mapStateToProps)(LeaderboardComponent)
+export default connect(mapStateToProps)(withRouter(LeaderboardComponent))

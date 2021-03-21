@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import avatar from './../assets/avatar-2155431_1920.png'
 import classes from './QuestionVoteSubmitComponent.module.css'
-import {filterKeyValueObject,avatarUrl} from '../utils'
-import {_saveQuestionAnswer} from './../_DATA'
+import {avatarUrl} from '../utils'
 import { handleSubmitVote} from './../actions/actions'
 import {Redirect } from 'react-router-dom'
 class QuestionVoteSubmitComponent  extends Component{

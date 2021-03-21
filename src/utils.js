@@ -54,3 +54,6 @@ export const imgUrl = (name)=> {
 }
 
 
+export const isAuthenticatedUser = (user)=> {
+    return  user !== undefined && user !==null;
+}
