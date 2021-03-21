@@ -1,7 +1,7 @@
 # Udacity Advanced Frontend Web Development Nano Degree 
-# Would you rather: A Book Lending App
+# Would you rather: A Game Application
 ### Author : Khaled Saleh  
-###  Date:   11/03/2021  
+###  Date:   03-2021  
 
 ### ___________________________________________ 
 ## Project Overview
