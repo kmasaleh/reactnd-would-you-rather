@@ -1,5 +1,5 @@
 import {applyMiddleware} from 'redux'
-import appThunk from './thunk'
+//import appThunk from './thunk'
 import thunk from 'redux-thunk'
 import logger from './logger'
 
