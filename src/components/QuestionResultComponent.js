@@ -11,6 +11,10 @@ class QuestionResultComponent  extends Component{
     render(){
         console.log(this.props);
         const {question,author,autheduser} = this.props;
+
+
+        if(question===undefined)
+            return <Redirect to="/404" />
         const totalVotes = (question.optionOne.votes.length+question.optionTwo.votes.length);
         const option1 = {
             text : question.optionOne.text,
@@ -24,11 +28,16 @@ class QuestionResultComponent  extends Component{
             ratio : totalVotes>0?(question.optionTwo.votes.length*100/totalVotes):0,
             answered : question.optionTwo.votes.findIndex(v=>v===autheduser)!==-1
         }
+        
+        if(!autheduser)
+            return <Redirect to='/login' />
+        //if the user write the /questions/id he should the both types of polls answered an unanswered
+        // so i intercept the call here and if the question is answered i redirect it to the vote component    
+        if(!option1.answered && !option2.answered)
+                return <Redirect to={`/submit/${question.id}`} />
 
-        return !autheduser?
-            <Redirect to='/login' />
-            :
-         (
+
+            return (
             <div className={classes.container}>
                 <div className={classes.header}>Asked by <b>{author.name}</b></div>
                 <div className={classes.sideBar}>

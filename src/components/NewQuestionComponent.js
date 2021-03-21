@@ -21,6 +21,11 @@ class NewQuestionComponent  extends Component{
         const {authedUser,dispatch} = this.props;
         const {OptionOne,OptionTwo} = this.state;
 
+        if(OptionOne.length===0 || OptionTwo.length===0){
+            alert('Please complete the two options ..')
+            return;
+        }
+
         let question = {
             author: authedUser.id,
             optionOneText: OptionOne,
@@ -41,10 +46,13 @@ class NewQuestionComponent  extends Component{
         
         const {authedUser} = this.props;
         const {submitted,error} = this.state;
-        return submitted || !authedUser?
-            <Redirect to={`/home/`} />
-            :
-        (
+        
+        if(submitted )
+            return <Redirect to={`/home/`} />
+        if( !authedUser)
+            return <Redirect to={`/login/`} />
+            
+        return (
             <form onSubmit={this.handleSubmit}>
             <div className={classes.container}>
                 <div className={classes.header}><b>Create New Question</b></div>

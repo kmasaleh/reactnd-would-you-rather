@@ -5,7 +5,7 @@ import logo from './../logo.svg';
 import {mapKeyValueObjectToArray} from './../utils'
 import avatar_1 from './../assets/avatar-2155431_1920.png'
 import {ACTION_FACTORY} from './../actions/actions'
-import {Redirect} from 'react-router-dom'
+import {Redirect,useHistory} from 'react-router-dom'
 
 class Login extends Component{
 
@@ -18,7 +18,10 @@ class Login extends Component{
 
 
         }
+        
     }
+
+    
     onSignIn = ()=>{
         const {dispatch} = this.props;
         dispatch(ACTION_FACTORY.createSigninUser(this.state.selectedUser));
@@ -33,10 +36,11 @@ class Login extends Component{
     render(){
         const {users} = this.props;
         const {signedIn,selectedUser} = this.state;
-        return signedIn ?
-                (<Redirect to="/home/" />)
-                :
-            (
+        // this.props.history.goBack();
+        if(signedIn)
+            return (<Redirect to="/home/" />)
+        
+        return(
             <div className={classes.container}>
                 <header className={classes.header}>
                     <h2 style={{paddingTop:15}}>Welcome to the Would You Rathre App</h2>

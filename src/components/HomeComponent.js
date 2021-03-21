@@ -35,10 +35,13 @@ class Home extends Component{
     render(){
         const {answered,non,autheduser} = this.props;
         const {showAnswered} = this.state;
+        const redirect = autheduser === undefined;
 
-        return !autheduser?
-            <Redirect to="/login/"/>
-            :
+        
+        return redirect
+         ?
+        <Redirect to="/login"/>
+        :
         (
             <div className={classes.container}>
                 <header className={classes.header}>

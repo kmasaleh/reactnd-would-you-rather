@@ -6,7 +6,7 @@ import { Component ,Fragment} from 'react';
 import {getAllDataAction} from './actions/actions'
 import QuestionVoteSubmitComponent from './components/QuestionVoteSubmitComponent'
 import UserStatisticsComponent from './components/UserStatisticsComponent'
-import {BrowserRouter as Router,Route,Switch } from 'react-router-dom'
+import {BrowserRouter as Router,Redirect,Route,Switch } from 'react-router-dom'
 
 import Nav from './components/Nav'
 import Login from './components/Login';
@@ -15,7 +15,7 @@ import HomeComponent from './components/HomeComponent';
 import QuestionSubmitComponent from './components/QuestionVoteSubmitComponent'
 import LeaderboardComponent from './components/LeaderboardComponent'
 import NewQuestionComponent from './components/NewQuestionComponent'
-
+import Error from './components/404'
 
 class  App extends Component {
 
@@ -34,7 +34,6 @@ class  App extends Component {
     return (
       <Router>
         
-          <Fragment>
             <div className="App">
               <Nav/>
               {
@@ -42,40 +41,27 @@ class  App extends Component {
                 ?  null
                 : 
                   <Fragment>
-                  
-                  <div> 
+                    <Switch>
+                    <Route path="/" exact component={HomeComponent} />
                       <Route path="/home" exact component={HomeComponent} />
-                  </div>
-                  <div> 
                       <Route path="/add" exact component={NewQuestionComponent} />
-                  </div>
-    
-                  <div>
-                    <Route path="/leaderboard" exact component={LeaderboardComponent} />
-                  </div>
-                  <div> 
-                      <Route path="/result/:id" exact render ={({match})=>{
-                      return (<QuestionResultComponent id={match.params.id}/>)
-                        }}/>
-                  </div>
-                  <div> 
-                      <Route path="/login" exact component={Login} />
-                  </div>
-                  <div> 
-                      <Route path="/question/:id" exact render ={({match})=>{
-                      return (<QuestionSummaryComponent id={match.params.id}/>)
-                        }}/>
-                  </div>
-                  <div> 
+                      <Route path="/leaderboard" exact component={LeaderboardComponent} />
+                      
+                      <Route path="/questions/:id" exact render ={({match})=>{
+                        return (<QuestionResultComponent id={match.params.id}/>)
+                          }}/>
                       <Route path="/submit/:id" exact render ={({match})=>{
-                      return (<QuestionSubmitComponent id={match.params.id}/>)
-                        }}/>
-                  </div>
+                        return (<QuestionSubmitComponent id={match.params.id}/>)
+                          }}/>
+                      
+                      <Route path="/login" exact component={Login} />
+                      <Route path="/404" exact component={Error} />                      
+                      <Route path="" exact component={Error} />                      
+                    </Switch>
                   </Fragment>
               }
             </div>
-        </Fragment>
-  
+        
       </Router>
     );
   }
@@ -90,6 +76,8 @@ export default connectedApp;
 
 
 /*
+<Route path="" exact component={Error} />
+              <Redirect to="/404"   />
               <Login/>
               <QuestionResultComponent id={'8xf0y6ziyjabvozdd253nd'}/>
               <QuestionVoteSubmitComponent id={'8xf0y6ziyjabvozdd253nd'}/>

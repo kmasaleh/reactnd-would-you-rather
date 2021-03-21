@@ -41,7 +41,7 @@ class QuestionVoteSubmitComponent  extends Component{
         }
         const {submitted} = this.state;
         return submitted?
-            <Redirect to={`/result/${question.id}`} />
+            <Redirect to={`/questions/${question.id}`} />
             :
         (
             <div className={classes.container}>

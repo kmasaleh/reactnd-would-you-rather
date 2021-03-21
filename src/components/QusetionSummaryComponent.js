@@ -29,7 +29,7 @@ class QuestionSummaryComponent  extends Component{
             text : question.optionOne.text,
         }
         const {toVote} = this.state;
-        const questionPath = `${toVote?'/submit/':'/result/'}${question.id}`;
+        const questionPath = `${toVote?'/submit/':'/questions/'}${question.id}`;
 
         return  (
             <div className={classes.container}>
